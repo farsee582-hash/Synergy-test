@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-/* import { authOptions } from "@/app/api/auth/[...nextauth]/route"; */
+/* import { authOptions } from "@/lib/auth"; */
 // TODO: Fix import path or move authOptions to lib/auth.ts to avoid circular deps if needed
 
 export default async function AdminLayout({
