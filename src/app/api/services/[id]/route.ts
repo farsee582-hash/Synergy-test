@@ -22,10 +22,10 @@ export async function PUT(
 ) {
     try {
         const body = await request.json();
-        const { title, description, icon, link, order } = body;
+        const { title, description, icon, link, category, order } = body;
         const updatedService = await prisma.service.update({
             where: { id: params.id },
-            data: { title, description, icon, link, order },
+            data: { title, description, icon, link, category, order },
         });
         return NextResponse.json(updatedService);
     } catch (error) {

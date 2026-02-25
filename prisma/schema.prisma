@@ -35,6 +35,7 @@ model Service {
   description String
   icon        String?  // Class name or URL for icon
   link        String?
+  category    String   @default("Banking") // e.g., "Banking", "Accounting"
   order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

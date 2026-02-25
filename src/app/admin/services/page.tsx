@@ -9,6 +9,7 @@ interface Service {
     description: string;
     icon: string | null;
     link: string | null;
+    category: string;
     order: number;
 }
 
@@ -23,6 +24,7 @@ export default function ServicesAdminPage() {
         description: "",
         icon: "",
         link: "",
+        category: "Banking",
         order: 0
     });
 
@@ -49,6 +51,7 @@ export default function ServicesAdminPage() {
             description: service.description,
             icon: service.icon || "",
             link: service.link || "",
+            category: service.category || "Banking",
             order: service.order
         });
         setShowModal(true);
@@ -79,7 +82,7 @@ export default function ServicesAdminPage() {
             if (res.ok) {
                 setShowModal(false);
                 setEditingService(null);
-                setFormData({ title: "", description: "", icon: "", link: "", order: 0 });
+                setFormData({ title: "", description: "", icon: "", link: "", category: "Banking", order: 0 });
                 fetchServices();
             }
         } catch (error) {
@@ -112,7 +115,7 @@ export default function ServicesAdminPage() {
                 <button
                     onClick={() => {
                         setEditingService(null);
-                        setFormData({ title: "", description: "", icon: "", link: "", order: 0 });
+                        setFormData({ title: "", description: "", icon: "", link: "", category: "Banking", order: 0 });
                         setShowModal(true);
                     }}
                     style={{ backgroundColor: "var(--primary-green)", color: "white", padding: "0.75rem 1.5rem", borderRadius: "8px", fontWeight: "bold", border: "none", cursor: "pointer" }}
@@ -132,7 +135,20 @@ export default function ServicesAdminPage() {
                             )}
                         </div>
                         <div style={{ flex: 1 }}>
-                            <h3 style={{ fontWeight: "bold", fontSize: "1.1rem", marginBottom: "0.25rem" }}>{service.title}</h3>
+                            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.25rem" }}>
+                                <h3 style={{ fontWeight: "bold", fontSize: "1.1rem" }}>{service.title}</h3>
+                                <span style={{
+                                    fontSize: "0.7rem",
+                                    padding: "0.2rem 0.5rem",
+                                    backgroundColor: service.category === "Banking" ? "#e0f2fe" : "#dcfce7",
+                                    color: service.category === "Banking" ? "#0284c7" : "#16a34a",
+                                    borderRadius: "4px",
+                                    fontWeight: "bold",
+                                    textTransform: "uppercase"
+                                }}>
+                                    {service.category || "Banking"}
+                                </span>
+                            </div>
                             <p style={{ color: "gray", fontSize: "0.9rem", marginBottom: "0.25rem" }}>{service.description}</p>
                             {service.link && <p style={{ fontSize: "0.8rem", color: "var(--primary-green)" }}>Link: {service.link}</p>}
                         </div>
@@ -150,6 +166,18 @@ export default function ServicesAdminPage() {
                     <div style={{ backgroundColor: "white", padding: "2rem", borderRadius: "12px", width: "90%", maxWidth: "600px", maxHeight: "90vh", overflowY: "auto" }}>
                         <h2 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "1.5rem" }}>{editingService ? "Edit Service" : "New Service"}</h2>
                         <form onSubmit={handleSubmit} style={{ display: "grid", gap: "1rem" }}>
+                            <div>
+                                <label style={{ display: "block", marginBottom: "0.5rem", fontWeight: "600" }}>Category</label>
+                                <select
+                                    value={formData.category}
+                                    onChange={e => setFormData({ ...formData, category: e.target.value })}
+                                    style={{ width: "100%", padding: "0.75rem", border: "1px solid #d1d5db", borderRadius: "6px", backgroundColor: "white" }}
+                                    required
+                                >
+                                    <option value="Banking">Banking</option>
+                                    <option value="Accounting">Accounting & Tax Consultancy</option>
+                                </select>
+                            </div>
                             <div>
                                 <label style={{ display: "block", marginBottom: "0.5rem", fontWeight: "600" }}>Title</label>
                                 <input type="text" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} style={{ width: "100%", padding: "0.75rem", border: "1px solid #d1d5db", borderRadius: "6px" }} required />

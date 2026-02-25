@@ -16,9 +16,9 @@ export async function GET() {
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { title, description, icon, link } = body;
+        const { title, description, icon, link, category, order } = body;
         const newService = await prisma.service.create({
-            data: { title, description, icon, link },
+            data: { title, description, icon, link, category, order },
         });
         return NextResponse.json(newService);
     } catch (error) {

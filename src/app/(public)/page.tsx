@@ -14,18 +14,9 @@ export default async function Home() {
 
   const services = await getServices();
 
-  // Separate services into Banking and Tax categories based on the user's request
-  const bankingServicesList = [
-    "Business Bank Account Opening (Regular & Islamic)",
-    "Personal Bank Accounts (Savings & Current – Regular & Islamic)",
-    "Accounts for Non-Residents",
-    "POS Machines",
-    "Payment Link Setup (PayBy Link)",
-    "Online Payment Gateway Integration"
-  ];
-
-  const bankingServices = services.filter((service: any) => bankingServicesList.includes(service.title));
-  const taxServices = services.filter((service: any) => !bankingServicesList.includes(service.title));
+  // Separate services into Banking and Tax categories based on their database assigned category
+  const bankingServices = services.filter((service: any) => service.category === "Banking");
+  const taxServices = services.filter((service: any) => service.category !== "Banking");
 
   const partners = await getPartners();
   const testimonials = await getTestimonials();
