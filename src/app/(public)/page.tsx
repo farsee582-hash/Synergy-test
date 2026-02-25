@@ -93,8 +93,8 @@ export default async function Home() {
 
       {/* About Snippet */}
       <section style={{ padding: "6rem 0", backgroundColor: "var(--bg-light)" }}>
-        <div className="container" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }}>
-          <div>
+        <div className="container about-grid">
+          <div className="about-content">
             <h4 style={{ color: "var(--primary-green-dark)", fontWeight: "bold", marginBottom: "1rem", letterSpacing: "0.05em", textTransform: "uppercase", fontSize: "0.9rem" }}>About Synergy Hub</h4>
             <h2 style={{ fontSize: "2.75rem", fontWeight: "800", marginBottom: "1.5rem", lineHeight: "1.2", color: "var(--primary-navy)" }}>
               {content.home_about_title || "Banking Made Simple. Business Made Possible."}
@@ -102,7 +102,7 @@ export default async function Home() {
             <div style={{ color: "#4b5563", marginBottom: "2.5rem", whiteSpace: "pre-line", fontSize: "1.1rem", lineHeight: "1.8" }}>
               {content.home_about_text || "At Synergy Hub, we make banking and business compliance simple so you can focus on growing your company. Whether you need help setting up a bank account or managing your business finances, we're here to make every process seamless, compliant, and stress free."}
             </div>
-            <Link href="/about" className="btn btn-outline" style={{ color: "var(--primary-navy)", border: "2px solid var(--primary-navy)", padding: "0.75rem 2rem", borderRadius: "6px" }}>
+            <Link href="/about" className="btn btn-outline" style={{ display: "inline-block", color: "var(--primary-navy)", border: "2px solid var(--primary-navy)", padding: "0.75rem 2rem", borderRadius: "6px", textDecoration: "none", fontWeight: "600" }}>
               More About Us
             </Link>
           </div>
@@ -120,6 +120,21 @@ export default async function Home() {
             </form>
           </div>
         </div>
+
+        <style jsx>{`
+          .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+          }
+          @media (min-width: 1024px) {
+            .about-grid {
+              grid-template-columns: 1fr 1fr;
+              gap: 5rem;
+            }
+          }
+        `}</style>
       </section>
       <Testimonials testimonials={testimonials} />
       <FAQ faqs={faqs} />
