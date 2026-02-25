@@ -3,11 +3,16 @@ import PageHero from "@/components/PageHero";
 import Link from "next/link";
 
 export const generateStaticParams = async () => {
-    const posts = await prisma.blogPost.findMany({
-        where: { published: true },
-        select: { slug: true },
-    });
-    return posts.map((post) => ({ slug: post.slug }));
+    try {
+        const posts = await prisma.blogPost.findMany({
+            where: { published: true },
+            select: { slug: true },
+        });
+        return posts.map((post) => ({ slug: post.slug }));
+    } catch (error) {
+        console.warn("Skipping static params generation: DB not accessible during build.");
+        return [];
+    }
 };
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
