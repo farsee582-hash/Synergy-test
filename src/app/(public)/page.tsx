@@ -17,10 +17,10 @@ export default async function Home() {
   // Separate services into Banking and Tax categories based on the user's request
   const bankingServicesList = [
     "Business Bank Account Opening (Regular & Islamic)",
-    "Personal Bank Account Opening (Regular & Islamic)",
-    "Non-Resident Bank Account Opening (Regular & Islamic)",
-    "Offshore Bank Account Opening",
-    "Corporate Finance & Trade Finance",
+    "Personal Bank Accounts (Savings & Current – Regular & Islamic)",
+    "Accounts for Non-Residents",
+    "POS Machines",
+    "Payment Link Setup (PayBy Link)",
     "Online Payment Gateway Integration"
   ];
 
