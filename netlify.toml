@@ -1,7 +1,7 @@
 [build]
   base = "."
   publish = ".next"
-  command = "npm run build"
+  command = "npx prisma db push && npm run build"
 
 [build.environment]
   DATABASE_URL = "file:./prisma/dev.db"
