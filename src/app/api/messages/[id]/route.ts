@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth";
 
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     const session = await getServerSession(authOptions);
     if (!session) {
@@ -14,7 +14,7 @@ export async function DELETE(
 
     try {
         await prisma.contactSubmission.delete({
-            where: { id: params.id },
+            where: { id: (await context.params).id },
         });
         return NextResponse.json({ success: true });
     } catch (error) {

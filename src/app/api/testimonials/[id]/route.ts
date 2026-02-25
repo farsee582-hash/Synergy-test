@@ -4,11 +4,11 @@ import prisma from "@/lib/prisma";
 
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
         await prisma.testimonial.delete({
-            where: { id: params.id },
+            where: { id: (await context.params).id },
         });
         return NextResponse.json({ success: true });
     } catch (error) {
@@ -18,13 +18,13 @@ export async function DELETE(
 
 export async function PUT(
     request: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
         const body = await request.json();
         const { name, role, content, rating, imageUrl, order, isActive } = body;
         const updatedTestimonial = await prisma.testimonial.update({
-            where: { id: params.id },
+            where: { id: (await context.params).id },
             data: { name, role, content, rating, imageUrl, order, isActive },
         });
         return NextResponse.json(updatedTestimonial);

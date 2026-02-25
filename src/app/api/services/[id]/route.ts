@@ -1,14 +1,14 @@
-
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await context.params;
         await prisma.service.delete({
-            where: { id: params.id },
+            where: { id },
         });
         return NextResponse.json({ success: true });
     } catch (error) {
@@ -18,17 +18,19 @@ export async function DELETE(
 
 export async function PUT(
     request: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await context.params;
         const body = await request.json();
         const { title, description, icon, link, category, order } = body;
         const updatedService = await prisma.service.update({
-            where: { id: params.id },
+            where: { id },
             data: { title, description, icon, link, category, order },
         });
         return NextResponse.json(updatedService);
     } catch (error) {
-        return NextResponse.json({ error: "Failed to update service" }, { status: 500 });
+        console.error("PUT API Error:", error);
+        return NextResponse.json({ error: "Failed to update service", details: error }, { status: 500 });
     }
 }

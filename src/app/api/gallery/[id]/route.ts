@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth";
 
 export async function PUT(
     request: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     const session = await getServerSession(authOptions);
     if (!session) {
@@ -16,7 +16,7 @@ export async function PUT(
         const { imageUrl, caption, category } = await request.json();
 
         const item = await prisma.galleryItem.update({
-            where: { id: params.id },
+            where: { id: (await context.params).id },
             data: {
                 imageUrl,
                 caption,
@@ -32,7 +32,7 @@ export async function PUT(
 
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     const session = await getServerSession(authOptions);
     if (!session) {
@@ -41,7 +41,7 @@ export async function DELETE(
 
     try {
         await prisma.galleryItem.delete({
-            where: { id: params.id },
+            where: { id: (await context.params).id },
         });
 
         return NextResponse.json({ success: true });
