@@ -120,21 +120,6 @@ export default async function Home() {
             </form>
           </div>
         </div>
-
-        <style jsx>{`
-          .about-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 4rem;
-            align-items: center;
-          }
-          @media (min-width: 1024px) {
-            .about-grid {
-              grid-template-columns: 1fr 1fr;
-              gap: 5rem;
-            }
-          }
-        `}</style>
       </section>
       <Testimonials testimonials={testimonials} />
       <FAQ faqs={faqs} />

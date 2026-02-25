@@ -99,3 +99,17 @@ ul {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
+
+/* About Section Responsive Grid */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+  }
+}
