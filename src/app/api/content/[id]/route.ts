@@ -10,7 +10,7 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
     }
 
     try {
-        const { id } = params;
+        const { id } = await context.params;
         const body = await request.json();
         const { content, imageUrl } = body;
 
@@ -35,7 +35,7 @@ export async function DELETE(request: Request, context: { params: Promise<{ id: 
     }
 
     try {
-        const { id } = params;
+        const { id } = await context.params;
         await prisma.pageContent.delete({
             where: { id },
         });
