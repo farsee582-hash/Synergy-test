@@ -30,11 +30,28 @@ export default function HeaderClient({ phone }: HeaderClientProps) {
             zIndex: 1000,
             borderBottom: "1px solid rgba(0,0,0,0.05)"
         }}>
-            <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1rem 0" }}>
+            <div className="container header-container" style={{ padding: "1rem 0" }}>
+                {/* Mobile Hamburger Button */}
+                <button className="mobile-menu-btn" onClick={toggleMenu} aria-label="Toggle menu" style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: "0.5rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "6px"
+                }}>
+                    <span style={{ display: "block", width: "24px", height: "2px", backgroundColor: "var(--primary-navy)", transition: "0.3s", transform: isMobileMenuOpen ? "rotate(45deg) translate(5px, 6px)" : "none" }}></span>
+                    <span style={{ display: "block", width: "24px", height: "2px", backgroundColor: "var(--primary-navy)", transition: "0.3s", opacity: isMobileMenuOpen ? 0 : 1 }}></span>
+                    <span style={{ display: "block", width: "24px", height: "2px", backgroundColor: "var(--primary-navy)", transition: "0.3s", transform: isMobileMenuOpen ? "rotate(-45deg) translate(5px, -6px)" : "none" }}></span>
+                </button>
+
                 {/* Logo */}
-                <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }} onClick={() => setIsMobileMenuOpen(false)}>
-                    <img src="/logo.png" alt="Synergy Hub Logo" style={{ height: "40px", objectFit: "contain" }} />
-                </Link>
+                <div className="header-logo-container">
+                    <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }} onClick={() => setIsMobileMenuOpen(false)}>
+                        <img src="/logo.png" alt="Synergy Hub Logo" className="header-logo" style={{ objectFit: "contain" }} />
+                    </Link>
+                </div>
 
                 {/* Desktop Nav */}
                 <nav style={{ display: "none" }} className="desktop-nav">
@@ -54,36 +71,22 @@ export default function HeaderClient({ phone }: HeaderClientProps) {
                     </ul>
                 </nav>
 
-                {/* Mobile Menu & CTA */}
-                <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                    <Link href="/contacts" className="btn desktop-cta" style={{
+                {/* CTA Button */}
+                <div className="header-cta-container">
+                    <Link href="/contacts" className="btn header-cta" style={{
                         backgroundColor: "var(--primary-green)",
                         color: "white",
-                        padding: "0.75rem 1.5rem",
+                        padding: "0.5rem 1rem",
                         borderRadius: "50px",
-                        fontSize: "0.9rem",
+                        fontSize: "0.85rem",
                         fontWeight: "600",
                         textDecoration: "none",
                         boxShadow: "0 4px 6px -1px rgba(76, 175, 80, 0.3)",
-                        display: "none"
+                        whiteSpace: "nowrap"
                     }}>
-                        Book Consultation
+                        <span className="cta-text-full">Book Consultation</span>
+                        <span className="cta-text-short">Book</span>
                     </Link>
-
-                    {/* Hamburger Button */}
-                    <button className="mobile-menu-btn" onClick={toggleMenu} aria-label="Toggle menu" style={{
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                        padding: "0.5rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "6px"
-                    }}>
-                        <span style={{ display: "block", width: "24px", height: "2px", backgroundColor: "var(--primary-navy)", transition: "0.3s", transform: isMobileMenuOpen ? "rotate(45deg) translate(5px, 6px)" : "none" }}></span>
-                        <span style={{ display: "block", width: "24px", height: "2px", backgroundColor: "var(--primary-navy)", transition: "0.3s", opacity: isMobileMenuOpen ? 0 : 1 }}></span>
-                        <span style={{ display: "block", width: "24px", height: "2px", backgroundColor: "var(--primary-navy)", transition: "0.3s", transform: isMobileMenuOpen ? "rotate(-45deg) translate(5px, -6px)" : "none" }}></span>
-                    </button>
                 </div>
             </div>
 
