@@ -13,6 +13,20 @@ export default async function Home() {
   const slides = await getHeroSlides();
 
   const services = await getServices();
+
+  // Separate services into Banking and Tax categories based on the user's request
+  const bankingServicesList = [
+    "Business Bank Account Opening (Regular & Islamic)",
+    "Personal Bank Account Opening (Regular & Islamic)",
+    "Non-Resident Bank Account Opening (Regular & Islamic)",
+    "Offshore Bank Account Opening",
+    "Corporate Finance & Trade Finance",
+    "Online Payment Gateway Integration"
+  ];
+
+  const bankingServices = services.filter((service: any) => bankingServicesList.includes(service.title));
+  const taxServices = services.filter((service: any) => !bankingServicesList.includes(service.title));
+
   const partners = await getPartners();
   const testimonials = await getTestimonials();
   const faqs = await getFaqs();
@@ -82,7 +96,7 @@ export default async function Home() {
 
       <StatsSection />
 
-      <ServicesElegant services={services} />
+      <ServicesElegant bankingServices={bankingServices} taxServices={taxServices} />
 
       <PartnersCarousel partners={partners} />
 
