@@ -44,27 +44,18 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
     };
 
     return (
-        <section style={{
-            padding: "2rem",
-            backgroundColor: "white",
-        }}>
-            <div style={{
-                borderRadius: "2rem",
-                overflow: "hidden",
-                position: "relative",
-                minHeight: "500px", // Increased height for visual impact
-                backgroundColor: "var(--primary-navy)"
-            }}>
+        <section className="hero-wrapper">
+            <div className="hero-inner">
                 {/* Slides Container */}
-                <div style={{ position: "relative", width: "100%", height: "500px" }}>
+                <div style={{ position: "relative", width: "100%", height: "100%", minHeight: "inherit" }}>
                     {slides.map((slide, index) => (
                         <div
                             key={slide.id}
+                            className="hero-content"
                             style={{
                                 position: "absolute",
                                 top: 0,
                                 left: 0,
-                                width: "100%",
                                 height: "100%",
                                 opacity: index === currentIndex ? 1 : 0,
                                 transition: "opacity 1s ease-in-out",
@@ -74,7 +65,6 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 textAlign: "center",
-                                padding: "4rem",
                                 color: "white"
                             }}
                         >
@@ -107,10 +97,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
                             </div>
 
                             {/* Content */}
-                            <h1 style={{
-                                fontSize: "3.5rem",
-                                fontWeight: "800",
-                                marginBottom: "1rem",
+                            <h1 className="hero-title" style={{
                                 textShadow: "0 2px 4px rgba(0,0,0,0.3)",
                                 transform: index === currentIndex ? "translateY(0)" : "translateY(20px)",
                                 opacity: index === currentIndex ? 1 : 0,
@@ -119,11 +106,9 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
                                 {slide.title}
                             </h1>
                             {slide.subtitle && (
-                                <p style={{
-                                    fontSize: "1.25rem",
+                                <p className="hero-subtitle" style={{
                                     opacity: 0.9,
                                     maxWidth: "700px",
-                                    marginBottom: "2.5rem",
                                     transform: index === currentIndex ? "translateY(0)" : "translateY(20px)",
                                     transition: "all 1s ease-out 0.4s"
                                 }}>

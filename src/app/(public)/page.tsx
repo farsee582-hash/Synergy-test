@@ -29,58 +29,41 @@ export default async function Home() {
       {slides.length > 0 ? (
         <HeroCarousel slides={slides} />
       ) : (
-        <section style={{
-          padding: "2rem", // Create the frame effect
-          backgroundColor: "white",
-        }}>
-          <div style={{
-            backgroundColor: "var(--primary-navy)",
-            borderRadius: "2rem",
-            overflow: "hidden",
-            position: "relative",
-            minHeight: "400px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            padding: "4rem",
-            flexDirection: "column",
-            color: "white"
-          }}>
-            {/* Background Image Overlay */}
-            {content.hero_bg && (
-              <div style={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0,
-                backgroundImage: `url(${content.hero_bg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                opacity: 0.3,
-                zIndex: 0
-              }}></div>
-            )}
+        <section className="hero-wrapper">
+          <div className="hero-inner">
+            <div className="hero-content" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", zIndex: 1 }}>
+              {/* Background Image Overlay */}
+              {content.hero_bg && (
+                <div style={{
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                  left: 0,
+                  backgroundImage: `url(${content.hero_bg})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  opacity: 0.3,
+                  zIndex: -1
+                }}></div>
+              )}
 
-            <h1 style={{ fontSize: "3rem", fontWeight: "800", marginBottom: "1rem", position: "relative", zIndex: 1 }}>
-              {content.hero_title}
-            </h1>
-            <p style={{ fontSize: "1.25rem", opacity: 0.9, maxWidth: "700px", marginBottom: "2rem", position: "relative", zIndex: 1 }}>
-              {content.hero_subtitle}
-            </p>
-            <Link href="/contacts" className="btn" style={{
-              backgroundColor: "var(--primary-green)",
-              color: "white",
-              padding: "1rem 2rem",
-              borderRadius: "8px",
-              fontWeight: "bold",
-              textDecoration: "none",
-              position: "relative",
-              zIndex: 1
-            }}>
-              {content.hero_cta}
-            </Link>
+              <h1 className="hero-title">
+                {content.hero_title}
+              </h1>
+              <p className="hero-subtitle" style={{ opacity: 0.9, maxWidth: "700px" }}>
+                {content.hero_subtitle}
+              </p>
+              <Link href="/contacts" className="btn btn-primary" style={{
+                position: "relative",
+                zIndex: 1,
+                padding: "1rem 2rem",
+                borderRadius: "8px",
+                textDecoration: "none"
+              }}>
+                {content.hero_cta}
+              </Link>
+            </div>
           </div>
         </section>
       )}
