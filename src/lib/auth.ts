@@ -47,5 +47,6 @@ export const authOptions: NextAuthOptions = {
             return session
         }
     },
+    useSecureCookies: process.env.NODE_ENV === 'production',
     secret: process.env.NEXTAUTH_SECRET || "supersecretkey"
 }
